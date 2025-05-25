@@ -11,6 +11,10 @@ target/
 .env
 .env.*.local
 
+*.dev.json
+*.dev.yml
+*.dev.yaml
+
 *.log
 *.tgz
 *.zip
