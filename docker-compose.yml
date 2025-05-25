@@ -1,0 +1,20 @@
+version: "3.8"
+name: stutun
+
+services:
+  sing-box:
+    image: ghcr.io/sagernet/sing-box
+    restart: unless-stopped
+    ports:
+      - 10.10.10.10:53:60606/udp
+    volumes:
+      - ./data:/etc/sing-box/
+    command: -D /etc/sing-box/ -C /etc/sing-box/ run -c server.json
+
+  listen-server:
+    image: ghcr.io/cnily03/listentt
+    build:
+      context: ./listentt
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: '-h 0.0.0.0 -p 1234'

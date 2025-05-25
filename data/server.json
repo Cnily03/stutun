@@ -1,0 +1,42 @@
+{
+  "inbounds": [
+    {
+      "type": "vmess",
+      "tag": "in.vmess-quic",
+      "listen": "0.0.0.0",
+      "listen_port": 60606,
+      "users": [
+        {
+          "name": "miku",
+          "uuid": "e391ad23-972e-c31d-97df-026c6933ad42",
+          "alterId": 0
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "certificate_path": "server.crt",
+        "key_path": "server.key"
+      },
+      "transport": {
+        "type": "quic"
+      },
+      "multiplex": {}
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "out.direct"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "rules": [
+      {
+        "inbound": "in.vmess-quic",
+        "outbound": "out.direct"
+      }
+    ]
+  }
+}
+

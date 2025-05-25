@@ -1,0 +1,72 @@
+{
+  "inbounds": [
+    {
+      "type": "direct",
+      "tag": "in.raw",
+      "listen": "127.0.0.1",
+      "listen_port": 30300
+    },
+    {
+      "type": "direct",
+      "tag": "in.raw.test",
+      "listen": "127.0.0.1",
+      "listen_port": 30302,
+      "override_address": "listen-server",
+      "override_port": 1234
+    },
+    {
+      "type": "mixed",
+      "tag": "in.mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 30308,
+      "users": [
+        {
+          "username": "admin",
+          "password": "admin"
+        }
+      ],
+      "set_system_proxy": false
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "vmess",
+      "tag": "out.vmess-quic",
+      "server": "10.10.10.10",
+      "server_port": 53,
+      "uuid": "e391ad23-972e-c31d-97df-026c6933ad42",
+      "security": "auto",
+      "alter_id": 0,
+      "global_padding": false,
+      "authenticated_length": true,
+      "tls": {
+        "enabled": true,
+        "disable_sni": false,
+        "insecure": true,
+        "server_name": "dev.opencumt.org"
+      },
+      "packet_encoding": "",
+      "transport": {
+        "type": "quic"
+      },
+      "multiplex": {}
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "rules": [
+      {
+        "inbound": "in.mixed",
+        "outbound": "out.vmess-quic"
+      },
+      {
+        "inbound": "in.raw.test",
+        "outbound": "out.vmess-quic"
+      },
+      {
+        "inbound": "in.raw",
+        "outbound": "out.vmess-quic"
+      }
+    ]
+  }
+}
