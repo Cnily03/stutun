@@ -9,7 +9,7 @@ services:
       - 10.10.10.10:53:60606/udp
     volumes:
       - ./data:/etc/sing-box/
-    command: -D /etc/sing-box/ -C /etc/sing-box/ run -c server.json
+    command: -D /etc/sing-box/ run -c server.json
 
   listen-server:
     image: ghcr.io/cnily03/listentt
