@@ -36,7 +36,7 @@ Generate a certificate and key for the server:
 
 ```bash
 # create private key
-openssl genpkey -algorithm RSA -out server.key -aes256 -pkeyopt rsa_keygen_bits:2048
+openssl genpkey -algorithm RSA -out server.key -pkeyopt rsa_keygen_bits:2048
 # create certificate signing request
 openssl req -new -key server.key -out server.csr
 # create self-signed certificate
